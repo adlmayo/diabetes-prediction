@@ -1,14 +1,8 @@
 # Diabetes Prediction
-
-A binary classification project that predicts whether a patient is likely to have diabetes, based on the [Pima Indians Diabetes Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database).
-
----
+A binary classification project that predicts whether a patient is likely to have diabetes.
 
 ## Problem Statement
-
 Given 8 clinical measurements for a female patient (age 21+), predict whether she tests positive for diabetes (`Outcome = 1`) or not (`Outcome = 0`).
-
----
 
 ## Dataset
 
@@ -24,15 +18,13 @@ Given 8 clinical measurements for a female patient (age 21+), predict whether sh
 
 > Several columns use `0` as a placeholder for missing values (e.g. a BMI of 0 is physiologically impossible). These are treated as `NaN` and imputed with the column median.
 
----
 
 ## Project Structure
 
-```
 diabetes-prediction/
 ├── diabetes.csv                          # Raw dataset
-├── Diabetes_prediction_improved.ipynb    # Main notebook (full pipeline)
-├── diabetes_prediction_model.pkl         # Serialised model (generated on run)
+├── Diabetes_prediction.ipynb    # Main notebook (full pipeline)
+├── diabetes.pkl         # Serialised model (generated on run)
 └── README.md
 ```
 
@@ -55,7 +47,6 @@ Raw CSV → EDA → Preprocessing → Train/Test Split → Baseline
 7. **Evaluation** — confusion matrix, classification report, ROC curve
 8. **Serialisation** — full pipeline (scaler + classifier) saved with `pickle`
 
----
 
 ## Results
 
@@ -67,7 +58,6 @@ Raw CSV → EDA → Preprocessing → Train/Test Split → Baseline
 
 > Exact numbers will vary slightly depending on your environment and scikit-learn version.
 
----
 
 ## Setup & Usage
 
@@ -91,7 +81,7 @@ The notebook is self-contained — run all cells top to bottom. The trained mode
 import pickle
 import pandas as pd
 
-with open("diabetes_prediction_model.pkl", "rb") as f:
+with open("diabetes.pkl", "rb") as f:
     model = pickle.load(f)
 
 patient = pd.DataFrame(
@@ -107,7 +97,6 @@ print(f"Prediction  : {'Diabetes' if prediction == 1 else 'No Diabetes'}")
 print(f"Probability : {probability:.1%}")
 ```
 
----
 
 ## Design Decisions
 
@@ -116,7 +105,6 @@ print(f"Probability : {probability:.1%}")
 - **ROC-AUC as tuning metric** — more informative than accuracy for imbalanced classes
 - **`StratifiedKFold`** — preserves the class ratio in every cross-validation fold
 
----
 
 ## Possible Next Steps
 
